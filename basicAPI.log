@@ -1,0 +1,22 @@
+2023-09-14T20:37:36.301Z [info]: Grocery list request made
+2023-09-14T20:38:00.502Z [info]: Full grocery list viewed
+2023-09-14T20:38:40.043Z [info]: Full grocery list viewed
+2023-09-14T20:38:42.262Z [info]: New item added: [object Object]
+2023-09-14T20:39:22.173Z [info]: New item added: Apple
+2023-09-14T20:39:28.850Z [info]: Full grocery list viewed
+2023-09-14T20:39:33.406Z [info]: 
+            Item was updated:
+            Old item: [object Object]
+            Updated item: [object Object]
+2023-09-14T20:40:11.822Z [info]: Item was deleted: [object Object]
+2023-09-14T20:40:36.358Z [info]: Item was deleted: function toString() { [native code] }
+2023-09-14T20:40:48.840Z [info]: Item was deleted: [object Object]
+2023-09-14T20:41:00.157Z [info]: Item was deleted: undefined
+2023-09-14T20:41:06.773Z [info]: Item was deleted: undefined
+2023-09-14T20:41:11.672Z [info]: Full grocery list viewed
+2023-09-14T20:42:21.249Z [info]: Item was deleted: undefined
+2023-09-14T20:42:51.428Z [info]: Item was deleted: undefined
+2023-09-14T20:43:37.756Z [info]: Item was deleted: Milk
+2023-09-14T20:44:14.631Z [info]: 
+            Item was updated: Oreos
+2023-09-14T20:44:43.167Z [warn]: Bad request made
