@@ -93,3 +93,11 @@ const server = http.createServer((req, res) => {
 server.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);
 });
+
+process.on('uncaughtException', (error) => {
+    logger.error('Uncaught Exception:', error);
+    server.close();
+    logger.on('finish', () => {
+        process.exit(1);
+    })
+})
