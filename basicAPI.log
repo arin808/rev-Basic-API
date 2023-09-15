@@ -81,3 +81,13 @@
 2023-09-15T18:44:07.852Z [info]: Item was updated: test
 2023-09-15T18:44:07.858Z [info]: Item was deleted: test
 2023-09-15T18:44:07.866Z [warn]: Bad request made
+2023-09-15T18:44:26.124Z [info]: Full grocery list viewed
+2023-09-15T18:44:26.155Z [info]: New item added: test
+2023-09-15T18:44:26.165Z [info]: Item was updated: test
+2023-09-15T18:44:26.175Z [info]: Item was deleted: test
+2023-09-15T18:44:26.183Z [warn]: Bad request made
+2023-09-15T18:44:33.277Z [info]: Full grocery list viewed
+2023-09-15T18:44:33.310Z [info]: New item added: test
+2023-09-15T18:44:33.322Z [info]: Item was updated: test
+2023-09-15T18:44:33.337Z [info]: Item was deleted: test
+2023-09-15T18:44:33.348Z [warn]: Bad request made

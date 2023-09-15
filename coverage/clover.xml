@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1694803447938" clover="3.2.0">
-  <project timestamp="1694803447938" name="All files">
+<coverage generated="1694803474091" clover="3.2.0">
+  <project timestamp="1694803474091" name="All files">
     <metrics statements="55" coveredstatements="51" conditionals="12" coveredconditionals="12" methods="9" coveredmethods="7" elements="76" coveredelements="70" complexity="0" loc="55" ncloc="55" packages="1" files="1" classes="1"/>
     <file name="app.js" path="C:\Users\snipa\revature\git\revBasicAPI\rev-Basic-API\app.js">
       <metrics statements="55" coveredstatements="51" conditionals="12" coveredconditionals="12" methods="9" coveredmethods="7"/>
