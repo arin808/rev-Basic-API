@@ -86,13 +86,14 @@ const server = http.createServer((req, res) => {
         // If request not found, default to message
         logger.warn("Bad request made");
         res.writeHead(404, { 'Content-Type': 'text/plain'});
-        res.end('Not Found');
+        res.end("Not Found");
     }
 });
 
 server.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);
 });
+
 
 process.on('uncaughtException', (error) => {
     logger.error('Uncaught Exception:', error);
@@ -101,3 +102,5 @@ process.on('uncaughtException', (error) => {
         process.exit(1);
     })
 })
+
+module.exports = server;
