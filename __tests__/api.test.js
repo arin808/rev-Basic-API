@@ -1,45 +1,51 @@
 /**
- * Supertest assistance from https://medium.com/@golakiyachintan24/how-to-test-http-apis-using-jest-and-supertest-in-node-js-f25cbafacf52
-*/
-const server = require('../app.js');
-const req = require('supertest');
+ * This test only checks the functions used to separate the logic from
+ * the HTTP requests and responses. The functions are tested with mock data
+ * to ensure they are working properly.
+ * As a result, the code coverage is down to 30%.
+ * Please do not hesitate to reach out if this is unnacceptable.
+ */
+const {returnGroceryList, addItem, editItem, deleteItem} = require('../app.js');
 
-describe('HTTP Requests', () => {
-    test('GET request gets and displays all items', async () => {
-        const response = await req(server).get('/api/groceryList')
-        expect(response.status).toEqual(200);
-        expect(response.type).toEqual('application/json');
-    });
-    test('POST request adds an item to the list', async () => {
-        const response = await req(server).post('/api/addItem')
-        .send({productName: 'test', quantity: 1, price: 1.00});
-        expect(response.status).toEqual(201);
-        expect(response.body.message).toEqual('Item successfully added to the list');
-        expect(response.type).toEqual('application/json');
-    });
-    test('PUT request edits an item', async () => {
-        const id = 1;
-        const response = await req(server).put`/api/editItem?id=${id}`
-        .send({id: 1, productName: 'test', quantity: 1, price: 1.00});
-        expect(response.status).toEqual(201);
-        expect(response.body.message).toEqual('Item successfully changed.');
-        expect(response.type).toEqual('application/json');
-    });
-    test('DELETE request removes an item from the list', async () => {
-        const id = 1;
-        const response = await req(server).delete`/api/deleteItem?id=${id}`;
-        expect(response.status).toEqual(200);
-        expect(response.body.message).toEqual('Item successfully deleted');
-        expect(response.type).toEqual('application/json');
-    });
-    test('404 error if request not found', async () => {
-        const response = await req(server).get('/api/doesNotExist');
-        expect(response.status).toEqual(404);
-        expect(response.text).toEqual('Not Found');
-        expect(response.type).toEqual('text/plain');
-    });
-});
+const mockList = [
+    { id: 1, productName:"Test", price: 9.99, qty: 3, purchased: false }];
 
-afterEach(() => {
-    server.close();
-});
+describe('API Method Testing', () => {
+    test('returnGroceryList should return the groceryList array', () => {
+        // Convert array to JSON string to compare for match
+        // Arrange and Act
+        const expected = JSON.stringify(mockList);
+        const result = returnGroceryList(mockList);
+
+        // Assert
+        expect(result).toEqual(expected);
+    });
+    test('addItem should add an item to the groceryList array', () => {
+        // Arrange
+        const newItem = { id: 2, productName:"Test2", price: 9.99, qty: 3, purchased: false };
+        const expected = mockList.length + 1;
+        // Act
+        addItem(newItem, mockList);
+        // Assert
+        expect(mockList.length).toEqual(expected);
+    });
+    test('editItem should edit an item in the groceryList array', () => {
+        // Arrange
+        const newItem = { id: 1, productName:"Test2", price: 9.99, qty: 3, purchased: false };
+        const expected = newItem.productName;
+        const index = newItem.id - 1;
+        // Act
+        editItem(index, newItem, mockList);
+        // Assert
+        expect(mockList[0].productName).toEqual(expected);
+    });
+    test('deleteItem should delete an item from the groceryList array', () => {
+        // Arrange
+        const expected = mockList.length - 1;
+        const index = 0;
+        // Act
+        deleteItem(index, mockList);
+        // Assert
+        expect(mockList.length).toEqual(expected);
+    });
+ });

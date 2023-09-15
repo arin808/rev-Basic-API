@@ -91,3 +91,4 @@
 2023-09-15T18:44:33.322Z [info]: Item was updated: test
 2023-09-15T18:44:33.337Z [info]: Item was deleted: test
 2023-09-15T18:44:33.348Z [warn]: Bad request made
+2023-09-15T20:29:06.401Z [error]: Uncaught Exception: Cannot read properties of undefined (reading 'push')

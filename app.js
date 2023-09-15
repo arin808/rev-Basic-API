@@ -5,7 +5,7 @@ const groceryList = [
     { id: 3, productName: "Whipped Cream", price: 2.99, qty: 2, purchased: false}];
 
 //Winston logger setup
-const { createLogger, transports, format} = require('winston');
+const { createLogger, transports, format, add} = require('winston');
 
 // Create the logger
 const logger = createLogger({
@@ -33,7 +33,7 @@ const server = http.createServer((req, res) => {
     if(req.method === 'GET' && req.url === '/api/groceryList'){
         logger.info("Full grocery list viewed");
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify(groceryList));
+        res.end(returnGroceryList());
         
     // POST (add an item to the list)
     }else if(req.method === 'POST' && req.url === '/api/addItem'){
@@ -43,8 +43,8 @@ const server = http.createServer((req, res) => {
             body += chunk;
         });
         req.on('end', () => {
-            const newItem = JSON.parse(body);
-            groceryList.push(newItem);
+            const newItem = addItem(body, groceryList);
+            
             logger.info(`New item added: ${newItem.productName}`);
             res.writeHead(201, { 'Content-Type': 'application/json'});
             res.end(JSON.stringify({message: 'Item successfully added to the list'}));
@@ -62,10 +62,9 @@ const server = http.createServer((req, res) => {
             body += chunk;
         });
         req.on('end', () => {
-            const updatedItem = JSON.parse(body);
             // Reassign object and index to the updated item
+            const updatedItem = editItem(index, body, groceryList);
             logger.info(`Item was updated: ${updatedItem.productName}`);
-            groceryList[index] = updatedItem;
             res.writeHead(201, { 'Content-Type': 'application/json'});
             res.end(JSON.stringify({message: 'Item successfully changed.'}));
         });
@@ -77,8 +76,7 @@ const server = http.createServer((req, res) => {
         // Subtract to find index
         const index = id - 1;
         // Delete and print message to user
-        const deletedItem = groceryList[index];
-        groceryList.splice(index, 1).productName;
+        const deletedItem = deleteItem(index, list);
         logger.info(`Item was deleted: ${deletedItem.productName}`);
         res.writeHead(200, {'Content-Type': 'application/json'});
         res.end(JSON.stringify({message: 'Item successfully deleted'}));
@@ -90,10 +88,29 @@ const server = http.createServer((req, res) => {
     }
 });
 
+function returnGroceryList(list){
+    return JSON.stringify(list);
+}
+
+function addItem(body, list){
+    list.push(body);
+    return body;
+}
+
+function editItem(index, body, list){
+    list[index] = body;
+    return list[index];
+}
+
+function deleteItem(index, list){
+    const deletedItem = list[index].prodductName;
+    list.splice(index, 1);
+    return deletedItem;
+}
+
 server.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);
 });
-
 
 process.on('uncaughtException', (error) => {
     logger.error('Uncaught Exception:', error);
@@ -103,4 +120,5 @@ process.on('uncaughtException', (error) => {
     })
 })
 
-module.exports = server;
+
+module.exports = {returnGroceryList, addItem, editItem, deleteItem};
