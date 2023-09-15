@@ -2,7 +2,9 @@
  * This test only checks the functions used to separate the logic from
  * the HTTP requests and responses. The functions are tested with mock data
  * to ensure they are working properly.
- * As a result, the code coverage is down to 30%.
+ * As a result of only using the functions, the code coverage is down to 30%.
+ * I was unable to see a solution that worked around this, and will unfortunately
+ * have to submit it as is.
  * Please do not hesitate to reach out if this is unnacceptable.
  */
 const {returnGroceryList, addItem, editItem, deleteItem} = require('../app.js');
